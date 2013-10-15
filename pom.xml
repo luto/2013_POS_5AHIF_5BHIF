@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- The Basics -->
-	<groupId>at.grueneis.spengergasse</groupId>
+	<groupId>at.grueneis.spengergasse.2013.v</groupId>
 	<artifactId>pos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -122,13 +122,18 @@
 
 
 	<!-- More Project Information -->
-	<!-- <name>...</name> -->
-	<!-- <description>...</description> -->
+	<name>2013 POS 5AHIF 5BHIF</name>
+	<description>A sample project for POS with the classes 5AHIF and 5BHIF</description>
 	<!-- <url>...</url> -->
 	<!-- <inceptionYear>...</inceptionYear> -->
 	<!-- <licenses>...</licenses> -->
 	<!-- <organization>...</organization> -->
-	<!-- <developers></developers> -->
+	<developers>
+		<developer>
+			<name>Joachim Grüneis</name>
+			<email>grueneis@spengergasse.at</email>
+		</developer>
+	</developers>
 	<!-- <contributors>...</contributors> -->
 
 
