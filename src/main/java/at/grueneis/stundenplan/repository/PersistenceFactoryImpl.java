@@ -1,39 +1,34 @@
-package at.grueneis.stundenplan.domain;
+package at.grueneis.stundenplan.repository;
 
-import java.util.Date;
+import java.util.HashMap;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-public class TeacherTest {
+public class PersistenceFactoryImpl implements PersistenceFactory {
 	private EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
+	private final HashMap<Class<?>, AnyRepository> repositories = new HashMap<>();
 
-	@Before
 	public void setup() {
 		entityManagerFactory = Persistence
 				.createEntityManagerFactory("spengergassePU");
 		entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
+
+		repositories.put(TeacherRepository.class, new TeacherRepository(
+				entityManager));
 	}
 
-	@After
 	public void teardown() {
-		if (entityManager != null)
-			entityManager.getTransaction().commit();
 		if (entityManager != null)
 			entityManager.close();
 		if (entityManagerFactory != null)
 			entityManagerFactory.close();
 	}
 
-	@Test
-	public void testMe() {
-		Teacher teacher = new Teacher("Franz", new Date());
-		entityManager.persist(teacher);
+	@Override
+	public TeacherRepository teacherRepository() {
+		return (TeacherRepository) repositories.get(TeacherRepository.class);
 	}
 }

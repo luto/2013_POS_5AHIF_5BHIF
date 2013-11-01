@@ -7,9 +7,13 @@
  */
 package at.grueneis.stundenplan.domain;
 
+import at.grueneis.stundenplan.Ensure;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,41 +21,70 @@ import javax.persistence.Table;
 @Table(name = "teaching_units")
 public class TeachingUnit extends BasePersistable {
 
-	private static final long serialVersionUID = -5889761023218222369L;
+    private static final long serialVersionUID = -5889761023218222369L;
 
-	protected static final String ATTR_TEACHER = "teacher";
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "curriculum_subject_id")
+    private CurriculumSubject curriculumSubject;
 
-	@ManyToOne
-	private Teacher teacher;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
-	@ManyToOne
-	private Subject subject;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "school_class_id")
+    private SchoolClass schoolClass;
 
-	@Enumerated(EnumType.STRING)
-	private Weekday weekday;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_room_id")
+    private ClassRoom classRoom;
 
-	private int lessonNumber;
+    @Enumerated(EnumType.STRING)
+    private Weekday weekday;
 
-	protected TeachingUnit() {
-	}
+    private int lessonNumber;
 
-	public TeachingUnit(Subject subject, Teacher teacher, Weekday weekday,
-			int lessonNumber) {
-		this.teacher = teacher;
-		this.subject = subject;
-		this.weekday = weekday;
-		this.lessonNumber = lessonNumber;
-	}
+    protected TeachingUnit() {
+        // required for JPA
+    }
 
-	public Subject getSubject() {
-		return subject;
-	}
+    public TeachingUnit(CurriculumSubject curriculumSubject, Teacher teacher, SchoolClass schoolClass,
+            ClassRoom classRoom, Weekday weekday, int lessonNumber) {
+        Ensure.notNull("curriculumSubject", curriculumSubject);
+        Ensure.notNull("teacher", teacher);
+        Ensure.notNull("schoolClass", schoolClass);
+        Ensure.notNull("classRoom", classRoom);
+        Ensure.notNull("weekday", weekday);
+        Ensure.notNull("lessonNumber", lessonNumber);
+        this.curriculumSubject = curriculumSubject;
+        this.teacher = teacher;
+        this.schoolClass = schoolClass;
+        this.classRoom = classRoom;
+        this.weekday = weekday;
+        this.lessonNumber = lessonNumber;
+    }
 
-	public Weekday getWeekday() {
-		return weekday;
-	}
+    public CurriculumSubject getCurriculumSubject() {
+        return curriculumSubject;
+    }
 
-	public int getLessonNumber() {
-		return lessonNumber;
-	}
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
+    }
+
+    public ClassRoom getClassRoom() {
+        return classRoom;
+    }
+
+    public Weekday getWeekday() {
+        return weekday;
+    }
+
+    public int getLessonNumber() {
+        return lessonNumber;
+    }
 }

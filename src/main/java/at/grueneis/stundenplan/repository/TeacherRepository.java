@@ -15,6 +15,10 @@ public class TeacherRepository implements AnyRepository {
 	private final EntityManager entityManager;
 
 	public TeacherRepository(EntityManager entityManager) {
+		if (entityManager == null) {
+			throw new IllegalArgumentException(
+					"An entityManager must be specified.");
+		}
 		this.entityManager = entityManager;
 	}
 

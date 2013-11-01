@@ -5,11 +5,13 @@
         version="2.0">
     <persistence-unit name="spengergassePU" transaction-type="RESOURCE_LOCAL">
         <class>at.grueneis.stundenplan.domain.Teacher</class>
+        <class>at.grueneis.stundenplan.domain.BasePersistable</class>
+        <class>at.grueneis.stundenplan.domain.emp.Employee</class>
         <properties>
         	<property name="hibernate.hbm2ddl.auto" value="create"/>
         	<property name="hibernate.show_sql" value="true"/>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:datajpa"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/datajpa;AUTO_SERVER=TRUE"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
         </properties>

@@ -1,5 +1,6 @@
 package at.grueneis.stundenplan.repository;
 
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -60,7 +61,7 @@ public class TeacherRepositoryTest {
 
 	@Test
 	public void persistAndFindTeacher() {
-		Teacher teacher = new Teacher("Grueneis");
+		Teacher teacher = new Teacher("Grueneis", new Date());
 
 		teacherRepository.persist(teacher);
 		assertThat(teacher.getId(), is(notNullValue()));

@@ -19,10 +19,6 @@ public abstract class BasePersistable implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Override
 	public int hashCode() {
 		return (getId() != null) ? getId().hashCode() : System

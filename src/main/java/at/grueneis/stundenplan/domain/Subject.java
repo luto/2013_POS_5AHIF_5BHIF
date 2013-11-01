@@ -7,13 +7,18 @@
  */
 package at.grueneis.stundenplan.domain;
 
+import at.grueneis.stundenplan.Ensure;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -30,35 +35,47 @@ public class Subject extends BasePersistable {
 	@Column(name = "name", nullable = false, length = 255)
 	private String name;
 
-	private int hoursPerWeek;
+    private String description;
 
-	@Enumerated(EnumType.STRING)
-	private CurriculumYear curriculumYear;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Collection<Teacher> teachers;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	private Collection<TeachingUnit> teachingUnits;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Collection<CurriculumSubject> curriculumSubjects;
 
 	protected Subject() {
+		// required for JPA
 	}
 
-	public Subject(String name, int hoursPerWeek) {
+	public Subject(String name, String description) {
+        Ensure.notNull("name", name);
 		this.name = name;
-		this.hoursPerWeek = hoursPerWeek;
+        this.description = description;
+        this.teachers = new ArrayList<>();
+        this.curriculumSubjects = new ArrayList<>();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getHoursPerWeek() {
-		return hoursPerWeek;
+    public String getDescription() {
+        return description;
+    }
+
+	public void addTeacher(Teacher teacher) {
+		teachers.add(teacher);
 	}
 
-	public CurriculumYear getCurriculumYear() {
-		return curriculumYear;
+	public Collection<Teacher> getTeachers() {
+		return Collections.unmodifiableCollection(teachers);
 	}
 
-	public Collection<TeachingUnit> getTeachingUnits() {
-		return teachingUnits;
+	public void addCurriculumSubject(CurriculumSubject curriculumSubject) {
+        curriculumSubjects.add(curriculumSubject);
+	}
+
+	public Collection<CurriculumSubject> getCurriculumSubjects() {
+		return Collections.unmodifiableCollection(curriculumSubjects);
 	}
 }

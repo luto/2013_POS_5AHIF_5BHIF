@@ -12,53 +12,63 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "school_classes")
-public class SchoolClass extends BasePersistable {
+@Table(name = "curriculum_subjects")
+public class CurriculumSubject extends BasePersistable {
 
-    private static final long serialVersionUID = -3987457976754795091L;
+    private static final long serialVersionUID = 7550955629376353786L;
 
-    @NotNull
+    @ManyToOne
+    private Curriculum curriculum;
+
+    @ManyToOne
+    private Subject subject;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "curriculum_year", nullable = false)
     private CurriculumYear curriculumYear;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "name", nullable = false, length = 255)
-    private String name;
+    private int numberOfHours;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "schoolClass")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "curriculumSubject")
     private Collection<TeachingUnit> teachingUnits;
 
-    protected SchoolClass() {
+    protected CurriculumSubject() {
         // required for JPA
     }
 
-    public SchoolClass(CurriculumYear curriculumYear, String name) {
+    public CurriculumSubject(Curriculum curriculum, Subject subject, CurriculumYear curriculumYear, int numberOfHours) {
+        Ensure.notNull("curriculum", curriculum);
+        Ensure.notNull("subject", subject);
         Ensure.notNull("curriculumYear", curriculumYear);
-        Ensure.notEmpty("name", name);
+        this.curriculum = curriculum;
+        this.subject = subject;
         this.curriculumYear = curriculumYear;
-        this.name = name;
+        this.numberOfHours = numberOfHours;
         this.teachingUnits = new ArrayList<>();
+    }
+
+    public Curriculum getCurriculum() {
+        return curriculum;
+    }
+
+    public Subject getSubject() {
+        return subject;
     }
 
     public CurriculumYear getCurriculumYear() {
         return curriculumYear;
     }
 
-    public String getName() {
-        return name;
+    public int getNumberOfHours() {
+        return numberOfHours;
     }
 
     public Collection<TeachingUnit> getTeachingUnits() {
