@@ -4,9 +4,9 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
         version="2.0">
     <persistence-unit name="spengergassePU" transaction-type="RESOURCE_LOCAL">
-        <class>at.grueneis.stundenplan.domain.Teacher</class>
-        <class>at.grueneis.stundenplan.domain.BasePersistable</class>
-        <class>at.grueneis.stundenplan.domain.emp.Employee</class>
+        <class>at.grueneis.timetable.domain.Teacher</class>
+        <class>at.grueneis.timetable.domain.BasePersistable</class>
+        <class>at.grueneis.timetable.domain.emp.Employee</class>
         <properties>
         	<property name="hibernate.hbm2ddl.auto" value="create"/>
         	<property name="hibernate.show_sql" value="true"/>
