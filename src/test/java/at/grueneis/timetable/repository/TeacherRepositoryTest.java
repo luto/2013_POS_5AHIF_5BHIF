@@ -20,34 +20,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 
-public class TeacherRepositoryTest {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-
-	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
-	private TeacherRepository teacherRepository;
-
-	@Before
-	public void setup() {
-		entityManagerFactory = Persistence
-				.createEntityManagerFactory("spengergassePU");
-		entityManager = entityManagerFactory.createEntityManager();
-		teacherRepository = new TeacherRepository(entityManager);
-		entityManager.getTransaction().begin();
-	}
-
-	@After
-	public void teardown() {
-		if (entityManager != null)
-			entityManager.getTransaction().commit();
-		if (entityManager != null)
-			entityManager.close();
-		if (entityManagerFactory != null)
-			entityManagerFactory.close();
-	}
-
+public class TeacherRepositoryTest extends AbstractJpaRepositoryTest {
 	@Test
 	public void findAllWithoutTeachers() {
+        TeacherRepository teacherRepository = new TeacherRepository(entityManager);
+
 		// expect
 		assertThat(teacherRepository.findAll().isEmpty(),
 				is(equalTo(Boolean.TRUE)));
@@ -55,12 +32,16 @@ public class TeacherRepositoryTest {
 
 	@Test
 	public void findByIdWithoutTeachers() {
+        TeacherRepository teacherRepository = new TeacherRepository(entityManager);
+
 		// expect
 		assertThat(teacherRepository.findById(0l), is(nullValue()));
 	}
 
 	@Test
 	public void persistAndFindTeacher() {
+        TeacherRepository teacherRepository = new TeacherRepository(entityManager);
+
 		Teacher teacher = new Teacher("Grueneis", new Date());
 
 		teacherRepository.persist(teacher);

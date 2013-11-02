@@ -11,7 +11,6 @@ import at.grueneis.timetable.Ensure;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,58 +28,58 @@ import javax.validation.constraints.Size;
 @Table(name = "teachers")
 public class Teacher extends BasePersistable {
 
-	private static final long serialVersionUID = -6667520361999134030L;
+    private static final long serialVersionUID = -6667520361999134030L;
 
-	@Size(max = 255)
-	@NotNull
-	@Column(name = "name", nullable = false, length = 255)
-	private String name;
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "name", nullable = false, length = 255)
+    private String name;
 
     @Temporal(TemporalType.DATE)
     @NotNull
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teachers")
-	private Collection<Subject> subjects;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teachers")
+    private Collection<Subject> subjects;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teacher")
-	private Collection<TeachingUnit> teachingUnits;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teacher")
+    private Collection<TeachingUnit> teachingUnits;
 
-	protected Teacher() {
-		// required for JPA
-	}
+    protected Teacher() {
+        // required for JPA
+    }
 
-	public Teacher(String name, Date birthDate) {
+    public Teacher(String name, Date birthDate) {
         Ensure.notEmpty("name", name);
         Ensure.notNull("birthDate", birthDate);
         this.name = name;
-        this.birthDate = birthDate;
+        this.birthDate = (Date)birthDate.clone();
         this.subjects = new ArrayList<>();
         this.teachingUnits = new ArrayList<>();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-    public Date getBirthDate() {
-        return birthDate;
     }
 
-	public void addSubject(Subject subject) {
-		subjects.add(subject);
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Collection<Subject> getSubjects() {
-		return Collections.unmodifiableCollection(subjects);
-	}
+    public Date getBirthDate() {
+        return (Date)birthDate.clone();
+    }
 
-	public void addTeachingUnit(TeachingUnit teachingUnit) {
-		teachingUnits.add(teachingUnit);
-	}
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+    }
 
-	public Collection<TeachingUnit> getTeachingUnits() {
-		return Collections.unmodifiableCollection(teachingUnits);
-	}
+    public Collection<Subject> getSubjects() {
+        return Collections.unmodifiableCollection(subjects);
+    }
+
+    public void addTeachingUnit(TeachingUnit teachingUnit) {
+        teachingUnits.add(teachingUnit);
+    }
+
+    public Collection<TeachingUnit> getTeachingUnits() {
+        return Collections.unmodifiableCollection(teachingUnits);
+    }
 }

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractJpaRepository<T extends BasePersistable> implements JpaRepository {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final EntityManager entityManager;
 

@@ -4,10 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- The Basics -->
-	<groupId>at.grueneis.spengergasse.2013.v</groupId>
-	<artifactId>pos</artifactId>
+	<groupId>at.grueneis.spengergasse</groupId>
+	<artifactId>2013_POS_5AHIF_5BHIF</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -69,40 +70,78 @@
 	<!-- <parent>...</parent> -->
 	<!-- <dependencyManagement>...</dependencyManagement> -->
 	<!-- <modules>...</modules> -->
-	<!-- <properties>...</properties> -->
+    <properties>
+        <jdk.version>1.7</jdk.version>
+        <jacoco.version>0.6.3.201306030806</jacoco.version>
+        <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.ut.execution.data.file>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 	<!-- Build Settings -->
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<verbose>true</verbose>
-					<fork>true</fork>
-					<compilerVersion>1.7</compilerVersion>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.16</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>2.16</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<includes>
-						<include>**/*.java</include>
-					</includes>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <!-- <fork>true</fork> -->
+                    <compilerVersion>${jdk.version}</compilerVersion>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <!-- Prepares the property pointing to the JaCoCo runtime agent which
+                        is passed as VM argument when Maven the Surefire plugin is executed. -->
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the path to the file which contains the execution data. -->
+                            <destFile>${jacoco.ut.execution.data.file}</destFile>
+                            <!-- Sets the name of the property containing the settings for JaCoCo
+                                runtime agent. -->
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.16</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!-- Sets the VM argument line used when unit tests are run. -->
+                    <argLine>${surefireArgLine}</argLine>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -132,6 +171,45 @@
 				<artifactId>maven-changes-plugin</artifactId>
 				<version>2.9</version>
 			</plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <configuration>
+                    <!-- Sets the path to the file which contains the execution data. -->
+                    <dataFile>${jacoco.ut.execution.data.file}</dataFile>
+                    <!-- Sets the output directory for the code coverage report. -->
+                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <configLocation>config/sun_checks.xml</configLocation>
+                    <!-- <configLocation>src/main/check/checkstyle.xml</configLocation> -->
+                    <!-- <packageNamesLocation>com/mycompany/checks/packagenames.xml</packageNamesLocation> -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>${jdk.version}</targetJdk>
+                    <!-- <excludes> <exclude>**/*Bean.java</exclude> <exclude>**/generated/*.java</exclude>
+                        </excludes> <excludeRoots> <excludeRoot>target/generated-sources/stubs</excludeRoot>
+                        </excludeRoots> -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
 		</plugins>
 	</reporting>
 
@@ -156,7 +234,11 @@
 	<!-- <issueManagement>...</issueManagement> -->
 	<!-- <ciManagement>...</ciManagement> -->
 	<!-- <mailingLists>...</mailingLists> -->
-	<!-- <scm>...</scm> -->
+    <scm>
+        <url>https://github.com/grueneis-spengergasse/2013_POS_5AHIF_5BHIF</url>
+        <connection>scm:git:git://github.com/grueneis-spengergasse/2013_POS_5AHIF_5BHIF.git</connection>
+        <developerConnection>scm:git:git@github.com:grueneis-spengergasse/2013_POS_5AHIF_5BHIF.git</developerConnection>
+    </scm>
 	<!-- <prerequisites>...</prerequisites> -->
 	<!-- <repositories>...</repositories> -->
 	<!-- <pluginRepositories>...</pluginRepositories> -->

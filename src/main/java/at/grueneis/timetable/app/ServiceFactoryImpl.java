@@ -3,7 +3,6 @@ package at.grueneis.timetable.app;
 import at.grueneis.timetable.repository.PersistenceFactory;
 import at.grueneis.timetable.service.ServiceFactory;
 import at.grueneis.timetable.service.TimetableManagementService;
-import com.sun.tracing.ProviderFactory;
 
 public class ServiceFactoryImpl implements ServiceFactory {
 
