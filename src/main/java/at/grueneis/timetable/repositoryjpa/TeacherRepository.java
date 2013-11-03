@@ -1,4 +1,4 @@
-package at.grueneis.timetable.repository;
+package at.grueneis.timetable.repositoryjpa;
 
 import at.grueneis.timetable.domain.Teacher;
 import java.util.List;

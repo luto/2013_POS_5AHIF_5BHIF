@@ -1,7 +1,7 @@
 package at.grueneis.timetable.service;
 
 import at.grueneis.timetable.domain.Teacher;
-import at.grueneis.timetable.repository.TeacherRepository;
+import at.grueneis.timetable.repositoryjpa.TeacherRepository;
 import java.util.Date;
 
 public class TimetableManagementService {

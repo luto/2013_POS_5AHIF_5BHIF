@@ -1,14 +1,14 @@
 package at.grueneis.timetable.app;
 
-import at.grueneis.timetable.repository.JpaRepository;
-import at.grueneis.timetable.repository.ClassRoomRepository;
-import at.grueneis.timetable.repository.CurriculumRepository;
-import at.grueneis.timetable.repository.CurriculumSubjectRepository;
-import at.grueneis.timetable.repository.PersistenceFactory;
-import at.grueneis.timetable.repository.SchoolClassRepository;
-import at.grueneis.timetable.repository.SubjectRepository;
-import at.grueneis.timetable.repository.TeacherRepository;
-import at.grueneis.timetable.repository.TeachingUnitRepository;
+import at.grueneis.timetable.repositoryjpa.JpaRepository;
+import at.grueneis.timetable.repositoryjpa.ClassRoomRepository;
+import at.grueneis.timetable.repositoryjpa.CurriculumRepository;
+import at.grueneis.timetable.repositoryjpa.CurriculumSubjectRepository;
+import at.grueneis.timetable.repositoryjpa.PersistenceFactory;
+import at.grueneis.timetable.repositoryjpa.SchoolClassRepository;
+import at.grueneis.timetable.repositoryjpa.SubjectRepository;
+import at.grueneis.timetable.repositoryjpa.TeacherRepository;
+import at.grueneis.timetable.repositoryjpa.TeachingUnitRepository;
 import java.util.HashMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

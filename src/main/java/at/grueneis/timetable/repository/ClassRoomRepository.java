@@ -8,19 +8,11 @@ package at.grueneis.timetable.repository;
 
 import at.grueneis.timetable.domain.ClassRoom;
 import java.util.List;
-import javax.persistence.EntityManager;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class ClassRoomRepository extends AbstractJpaRepository<ClassRoom> {
+@Repository
+public interface ClassRoomRepository extends CrudRepository<ClassRoom, Long> {
 
-    public ClassRoomRepository(EntityManager entityManager) {
-        super(entityManager);
-    }
-
-    public List<ClassRoom> findAll() {
-        return entityManager().createQuery("SELECT cr FROM ClassRoom cr", ClassRoom.class).getResultList();
-    }
-
-    public ClassRoom findById(Long id) {
-        return entityManager().find(ClassRoom.class, id);
-    }
+    List<ClassRoom> findByName(String name);
 }

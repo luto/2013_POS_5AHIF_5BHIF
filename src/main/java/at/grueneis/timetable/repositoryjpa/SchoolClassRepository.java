@@ -4,7 +4,7 @@
  * Copyright (C) 2010 - 2011
  * All rights reserved.
  */
-package at.grueneis.timetable.repository;
+package at.grueneis.timetable.repositoryjpa;
 
 import at.grueneis.timetable.domain.SchoolClass;
 import java.util.List;
