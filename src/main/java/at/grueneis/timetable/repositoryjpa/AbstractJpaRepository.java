@@ -9,6 +9,7 @@ package at.grueneis.timetable.repositoryjpa;
 import at.grueneis.timetable.domain.BasePersistable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,17 +17,17 @@ public abstract class AbstractJpaRepository<T extends BasePersistable> implement
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private final EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public AbstractJpaRepository(EntityManager entityManager) {
-        if (entityManager == null) {
-            throw new IllegalArgumentException("An entityManager must be specified.");
-        }
-        this.entityManager = entityManager;
-    }
+    public AbstractJpaRepository() {}
 
     protected EntityManager entityManager() {
         return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public abstract List<T> findAll();

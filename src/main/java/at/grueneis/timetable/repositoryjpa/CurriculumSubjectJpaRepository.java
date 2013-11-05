@@ -9,12 +9,10 @@ package at.grueneis.timetable.repositoryjpa;
 import at.grueneis.timetable.domain.CurriculumSubject;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
-public class CurriculumSubjectRepository extends AbstractJpaRepository<CurriculumSubject> {
-
-    public CurriculumSubjectRepository(EntityManager entityManager) {
-        super(entityManager);
-    }
+@Repository
+public class CurriculumSubjectJpaRepository extends AbstractJpaRepository<CurriculumSubject> {
 
     public List<CurriculumSubject> findAll() {
         return entityManager().createQuery("SELECT cs FROM CurriculumSubject cs", CurriculumSubject.class)

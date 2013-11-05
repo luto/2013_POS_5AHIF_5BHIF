@@ -13,37 +13,40 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 
-public class TeacherRepositoryTest extends AbstractJpaRepositoryTest {
+public class TeacherJpaRepositoryTest extends AbstractJpaRepositoryTest {
 	@Test
 	public void findAllWithoutTeachers() {
-        TeacherRepository teacherRepository = new TeacherRepository(entityManager);
+        TeacherJpaRepository teacherJpaRepository = new TeacherJpaRepository();
+        teacherJpaRepository.setEntityManager(entityManager);
 
 		// expect
-		assertThat(teacherRepository.findAll().isEmpty(),
+		assertThat(teacherJpaRepository.findAll().isEmpty(),
 				is(equalTo(Boolean.TRUE)));
 	}
 
 	@Test
 	public void findByIdWithoutTeachers() {
-        TeacherRepository teacherRepository = new TeacherRepository(entityManager);
+        TeacherJpaRepository teacherJpaRepository = new TeacherJpaRepository();
+        teacherJpaRepository.setEntityManager(entityManager);
 
 		// expect
-		assertThat(teacherRepository.findById(0l), is(nullValue()));
+		assertThat(teacherJpaRepository.findById(0l), is(nullValue()));
 	}
 
 	@Test
 	public void persistAndFindTeacher() {
-        TeacherRepository teacherRepository = new TeacherRepository(entityManager);
+        TeacherJpaRepository teacherJpaRepository = new TeacherJpaRepository();
+        teacherJpaRepository.setEntityManager(entityManager);
 
 		Teacher teacher = new Teacher("Grueneis", new Date());
 
-		teacherRepository.persist(teacher);
+		teacherJpaRepository.persist(teacher);
 		assertThat(teacher.getId(), is(notNullValue()));
 		Long newId = teacher.getId();
 
 		logger.info("Created teacher with id: {} - teacher: {}", newId, teacher);
 
-		Teacher teacherByFind = teacherRepository.findById(newId);
+		Teacher teacherByFind = teacherJpaRepository.findById(newId);
 		assertThat(teacherByFind, equalTo(teacher));
 	}
 }

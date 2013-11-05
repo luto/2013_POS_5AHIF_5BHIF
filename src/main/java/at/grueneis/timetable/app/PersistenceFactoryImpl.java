@@ -1,81 +1,83 @@
 package at.grueneis.timetable.app;
 
 import at.grueneis.timetable.repositoryjpa.JpaRepository;
-import at.grueneis.timetable.repositoryjpa.ClassRoomRepository;
-import at.grueneis.timetable.repositoryjpa.CurriculumRepository;
-import at.grueneis.timetable.repositoryjpa.CurriculumSubjectRepository;
+import at.grueneis.timetable.repositoryjpa.ClassRoomJpaRepository;
+import at.grueneis.timetable.repositoryjpa.CurriculumJpaRepository;
+import at.grueneis.timetable.repositoryjpa.CurriculumSubjectJpaRepository;
 import at.grueneis.timetable.repositoryjpa.PersistenceFactory;
-import at.grueneis.timetable.repositoryjpa.SchoolClassRepository;
-import at.grueneis.timetable.repositoryjpa.SubjectRepository;
-import at.grueneis.timetable.repositoryjpa.TeacherRepository;
-import at.grueneis.timetable.repositoryjpa.TeachingUnitRepository;
+import at.grueneis.timetable.repositoryjpa.SchoolClassJpaRepository;
+import at.grueneis.timetable.repositoryjpa.SubjectJpaRepository;
+import at.grueneis.timetable.repositoryjpa.TeacherJpaRepository;
+import at.grueneis.timetable.repositoryjpa.TeachingUnitJpaRepository;
 import java.util.HashMap;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class PersistenceFactoryImpl implements PersistenceFactory {
 
-    private EntityManagerFactory entityManagerFactory;
-
-    private EntityManager entityManager;
-
     private final HashMap<Class<?>, JpaRepository> repositories = new HashMap<>();
 
-    public void setup() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("spengergassePU");
-        entityManager = entityManagerFactory.createEntityManager();
+    public PersistenceFactoryImpl(EntityManager entityManager) {
+        ClassRoomJpaRepository classRoomJpaRepository = new ClassRoomJpaRepository();
+        classRoomJpaRepository.setEntityManager(entityManager);
+        repositories.put(ClassRoomJpaRepository.class, classRoomJpaRepository);
 
-        repositories.put(ClassRoomRepository.class, new ClassRoomRepository(entityManager));
-        repositories.put(CurriculumRepository.class, new CurriculumRepository(entityManager));
-        repositories.put(CurriculumSubjectRepository.class, new CurriculumSubjectRepository(entityManager));
-        repositories.put(SchoolClassRepository.class, new SchoolClassRepository(entityManager));
-        repositories.put(SubjectRepository.class, new SubjectRepository(entityManager));
-        repositories.put(TeacherRepository.class, new TeacherRepository(entityManager));
-        repositories.put(TeachingUnitRepository.class, new TeachingUnitRepository(entityManager));
-    }
+        CurriculumJpaRepository curriculumJpaRepository = new CurriculumJpaRepository();
+        curriculumJpaRepository.setEntityManager(entityManager);
+        repositories.put(CurriculumJpaRepository.class, curriculumJpaRepository);
 
-    public void teardown() {
-        if (entityManager != null) {
-            entityManager.close();
-        }
-        if (entityManagerFactory != null) {
-            entityManagerFactory.close();
-        }
-    }
+        CurriculumSubjectJpaRepository curriculumSubjectJpaRepository = new CurriculumSubjectJpaRepository();
+        curriculumSubjectJpaRepository.setEntityManager(entityManager);
+        repositories.put(CurriculumSubjectJpaRepository.class, curriculumSubjectJpaRepository);
 
-    @Override
-    public ClassRoomRepository classRoomRepository() {
-        return (ClassRoomRepository)repositories.get(ClassRoomRepository.class);
-    }
+        SchoolClassJpaRepository schoolClassJpaRepository = new SchoolClassJpaRepository();
+        schoolClassJpaRepository.setEntityManager(entityManager);
+        repositories.put(SchoolClassJpaRepository.class, schoolClassJpaRepository);
 
-    @Override
-    public CurriculumRepository curriculumRepository() {
-        return (CurriculumRepository)repositories.get(CurriculumRepository.class);
-    }
+        SubjectJpaRepository subjectJpaRepository = new SubjectJpaRepository();
+        subjectJpaRepository.setEntityManager(entityManager);
+        repositories.put(SubjectJpaRepository.class, subjectJpaRepository);
 
-    @Override
-    public CurriculumSubjectRepository curriculumSubjectRepository() {
-        return (CurriculumSubjectRepository)repositories.get(CurriculumSubjectRepository.class);
+        TeacherJpaRepository teacherJpaRepository = new TeacherJpaRepository();
+        teacherJpaRepository.setEntityManager(entityManager);
+        repositories.put(TeacherJpaRepository.class, teacherJpaRepository);
+
+        TeachingUnitJpaRepository teachingUnitJpaRepository = new TeachingUnitJpaRepository();
+        teachingUnitJpaRepository.setEntityManager(entityManager);
+        repositories.put(TeachingUnitJpaRepository.class, teachingUnitJpaRepository);
     }
 
     @Override
-    public SchoolClassRepository schoolClassRepository() {
-        return (SchoolClassRepository)repositories.get(SchoolClassRepository.class);
+    public ClassRoomJpaRepository classRoomRepository() {
+        return (ClassRoomJpaRepository)repositories.get(ClassRoomJpaRepository.class);
     }
 
     @Override
-    public SubjectRepository subjectRepository() {
-        return (SubjectRepository)repositories.get(SubjectRepository.class);
+    public CurriculumJpaRepository curriculumRepository() {
+        return (CurriculumJpaRepository)repositories.get(CurriculumJpaRepository.class);
     }
 
     @Override
-    public TeacherRepository teacherRepository() {
-        return (TeacherRepository)repositories.get(TeacherRepository.class);
+    public CurriculumSubjectJpaRepository curriculumSubjectRepository() {
+        return (CurriculumSubjectJpaRepository)repositories.get(CurriculumSubjectJpaRepository.class);
     }
 
     @Override
-    public TeachingUnitRepository teachingUnitRepository() {
-        return (TeachingUnitRepository)repositories.get(TeachingUnitRepository.class);
+    public SchoolClassJpaRepository schoolClassRepository() {
+        return (SchoolClassJpaRepository)repositories.get(SchoolClassJpaRepository.class);
+    }
+
+    @Override
+    public SubjectJpaRepository subjectRepository() {
+        return (SubjectJpaRepository)repositories.get(SubjectJpaRepository.class);
+    }
+
+    @Override
+    public TeacherJpaRepository teacherRepository() {
+        return (TeacherJpaRepository)repositories.get(TeacherJpaRepository.class);
+    }
+
+    @Override
+    public TeachingUnitJpaRepository teachingUnitRepository() {
+        return (TeachingUnitJpaRepository)repositories.get(TeachingUnitJpaRepository.class);
     }
 }

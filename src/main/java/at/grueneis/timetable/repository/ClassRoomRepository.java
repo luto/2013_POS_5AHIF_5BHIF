@@ -15,4 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface ClassRoomRepository extends CrudRepository<ClassRoom, Long> {
 
     List<ClassRoom> findByName(String name);
+
+    List<ClassRoom> findByBuilding(String building);
 }

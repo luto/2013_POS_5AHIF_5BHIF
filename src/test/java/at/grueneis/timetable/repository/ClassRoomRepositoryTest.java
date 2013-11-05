@@ -7,6 +7,7 @@
 package at.grueneis.timetable.repository;
 
 import at.grueneis.timetable.domain.ClassRoom;
+import java.util.List;
 import javax.sql.DataSource;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -45,7 +46,7 @@ public class ClassRoomRepositoryTest {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-        hibernateJpaVendorAdapter.setShowSql(false);
+        hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(true);
         hibernateJpaVendorAdapter.setDatabase(Database.H2);
         return hibernateJpaVendorAdapter;
@@ -61,5 +62,7 @@ public class ClassRoomRepositoryTest {
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(ClassRoomRepositoryTest.class);
         ClassRoomRepository repository = context.getBean(ClassRoomRepository.class);
         repository.save(new ClassRoom("C5.08", "C", "5"));
+
+        List<ClassRoom> byName = repository.findByName("C5.08");
     }
 }

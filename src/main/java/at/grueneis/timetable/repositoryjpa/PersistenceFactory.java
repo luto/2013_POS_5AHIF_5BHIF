@@ -2,17 +2,17 @@ package at.grueneis.timetable.repositoryjpa;
 
 public interface PersistenceFactory {
 
-    ClassRoomRepository classRoomRepository();
+    ClassRoomJpaRepository classRoomRepository();
 
-    CurriculumRepository curriculumRepository();
+    CurriculumJpaRepository curriculumRepository();
 
-    CurriculumSubjectRepository curriculumSubjectRepository();
+    CurriculumSubjectJpaRepository curriculumSubjectRepository();
 
-    SchoolClassRepository schoolClassRepository();
+    SchoolClassJpaRepository schoolClassRepository();
 
-    SubjectRepository subjectRepository();
+    SubjectJpaRepository subjectRepository();
 
-    TeacherRepository teacherRepository();
+    TeacherJpaRepository teacherRepository();
 
-    TeachingUnitRepository teachingUnitRepository();
+    TeachingUnitJpaRepository teachingUnitRepository();
 }

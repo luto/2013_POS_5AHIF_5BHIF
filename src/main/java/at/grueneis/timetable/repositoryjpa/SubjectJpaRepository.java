@@ -9,12 +9,10 @@ package at.grueneis.timetable.repositoryjpa;
 import at.grueneis.timetable.domain.Subject;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
-public class SubjectRepository extends AbstractJpaRepository<Subject> {
-
-    public SubjectRepository(EntityManager entityManager) {
-        super(entityManager);
-    }
+@Repository
+public class SubjectJpaRepository extends AbstractJpaRepository<Subject> {
 
     @Override
     public List<Subject> findAll() {
