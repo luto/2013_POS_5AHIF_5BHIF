@@ -4,7 +4,7 @@
  * Copyright (c) 2013 Joachim Grüneis
  * mailto:grueneis@spengergasse.at
  */
-package at.grueneis.timetable.repositoryjpa;
+package at.grueneis.timetable.repository;
 
 import at.grueneis.timetable.domain.DomainPackage;
 import javax.sql.DataSource;
@@ -16,9 +16,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+/**
+ *
+ */
 @Configuration
-@ComponentScan(basePackageClasses = RepositoryJpaPackage.class)
-public class RepositoryJpaConfiguration {
+@ComponentScan(basePackageClasses = RepositoryPackage.class)
+public class RepositoryConfiguration {
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {

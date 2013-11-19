@@ -6,6 +6,7 @@
  */
 package at.grueneis.timetable.domain;
 
-public enum Weekday {
-	SU, MO, TU, WE, TH, FR, SA;
-}
+/**
+ * A marker interface to be used in Spring configuration as reference.
+ */
+public interface DomainPackage {}

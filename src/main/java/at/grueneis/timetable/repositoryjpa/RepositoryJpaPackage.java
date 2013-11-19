@@ -6,6 +6,7 @@
  */
 package at.grueneis.timetable.repositoryjpa;
 
-public interface JpaRepository {
-
-}
+/**
+ * A marker interface to be used in Spring configuration as reference.
+ */
+public interface RepositoryJpaPackage {}

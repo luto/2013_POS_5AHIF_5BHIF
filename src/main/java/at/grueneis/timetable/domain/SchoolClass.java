@@ -1,9 +1,8 @@
-/**
- * Joachim Grueneis
- * mailto:grueneis@spengergasse.at
+/*
+ * The MIT License (MIT)
  *
- * Copyright (C) 2013
- * All rights reserved.
+ * Copyright (c) 2013 Joachim Grüneis
+ * mailto:grueneis@spengergasse.at
  */
 package at.grueneis.timetable.domain;
 

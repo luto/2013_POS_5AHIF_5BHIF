@@ -1,9 +1,10 @@
 /*
- * Jumio Inc.
+ * The MIT License (MIT)
  *
- * Copyright (C) 2010 - 2011
- * All rights reserved.
+ * Copyright (c) 2013 Joachim Grüneis
+ * mailto:grueneis@spengergasse.at
  */
+
 package at.grueneis.timetable.app;
 
 import at.grueneis.timetable.repositoryjpa.PersistenceFactory;

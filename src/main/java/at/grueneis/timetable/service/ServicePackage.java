@@ -6,6 +6,7 @@
  */
 package at.grueneis.timetable.service;
 
-public interface ServiceFactory {
-	TimetableManagementService timetableManagementService();
-}
+/**
+ * A marker interface to be used in Spring configuration as reference.
+ */
+public interface ServicePackage {}

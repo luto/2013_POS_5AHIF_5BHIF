@@ -1,8 +1,8 @@
 /*
- * Jumio Inc.
+ * The MIT License (MIT)
  *
- * Copyright (C) 2010 - 2011
- * All rights reserved.
+ * Copyright (c) 2013 Joachim Grüneis
+ * mailto:grueneis@spengergasse.at
  */
 package at.grueneis.timetable.service;
 
@@ -10,5 +10,5 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "at.grueneis.timetable.service")
+@ComponentScan(basePackageClasses = ServicePackage.class)
 public class ServiceConfiguration {}
