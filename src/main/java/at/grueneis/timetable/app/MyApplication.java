@@ -8,7 +8,7 @@
 package at.grueneis.timetable.app;
 
 import at.grueneis.timetable.repositoryjpa.PersistenceFactory;
-import at.grueneis.timetable.service.ServiceFactory;
+import at.grueneis.timetable.servicejpa.ServiceJpaFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,7 +24,7 @@ public class MyApplication {
 
     private PersistenceFactory persistenceFactory;
 
-    private ServiceFactory serviceFactory;
+    private ServiceJpaFactory serviceFactory;
 
     public MyApplication() {
         entityManagerFactory = Persistence.createEntityManagerFactory("spengergassePU");

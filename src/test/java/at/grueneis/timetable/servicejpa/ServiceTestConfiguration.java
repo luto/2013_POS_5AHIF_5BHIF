@@ -4,7 +4,7 @@
  * Copyright (C) 2010 - 2011
  * All rights reserved.
  */
-package at.grueneis.timetable.service;
+package at.grueneis.timetable.servicejpa;
 
 import at.grueneis.timetable.domain.DomainConfiguration;
 import at.grueneis.timetable.repositoryjpa.RepositoryJpaConfiguration;
@@ -19,7 +19,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
  *
  */
 @Configuration
-@Import({DomainConfiguration.class, RepositoryJpaConfiguration.class, ServiceConfiguration.class})
+@Import({DomainConfiguration.class, RepositoryJpaConfiguration.class, ServiceJpaConfiguration.class})
 public class ServiceTestConfiguration {
 
     @Bean

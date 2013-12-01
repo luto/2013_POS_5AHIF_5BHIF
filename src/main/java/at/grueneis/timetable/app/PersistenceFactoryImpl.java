@@ -56,37 +56,37 @@ public class PersistenceFactoryImpl implements PersistenceFactory {
     }
 
     @Override
-    public ClassRoomJpaRepository classRoomRepository() {
+    public ClassRoomJpaRepository classRoomJpaRepository() {
         return (ClassRoomJpaRepository)repositories.get(ClassRoomJpaRepository.class);
     }
 
     @Override
-    public CurriculumJpaRepository curriculumRepository() {
+    public CurriculumJpaRepository curriculumJpaRepository() {
         return (CurriculumJpaRepository)repositories.get(CurriculumJpaRepository.class);
     }
 
     @Override
-    public CurriculumSubjectJpaRepository curriculumSubjectRepository() {
+    public CurriculumSubjectJpaRepository curriculumSubjectJpaRepository() {
         return (CurriculumSubjectJpaRepository)repositories.get(CurriculumSubjectJpaRepository.class);
     }
 
     @Override
-    public SchoolClassJpaRepository schoolClassRepository() {
+    public SchoolClassJpaRepository schoolClassJpaRepository() {
         return (SchoolClassJpaRepository)repositories.get(SchoolClassJpaRepository.class);
     }
 
     @Override
-    public SubjectJpaRepository subjectRepository() {
+    public SubjectJpaRepository subjectJpaRepository() {
         return (SubjectJpaRepository)repositories.get(SubjectJpaRepository.class);
     }
 
     @Override
-    public TeacherJpaRepository teacherRepository() {
+    public TeacherJpaRepository teacherJpaRepository() {
         return (TeacherJpaRepository)repositories.get(TeacherJpaRepository.class);
     }
 
     @Override
-    public TeachingUnitJpaRepository teachingUnitRepository() {
+    public TeachingUnitJpaRepository teachingUnitJpaRepository() {
         return (TeachingUnitJpaRepository)repositories.get(TeachingUnitJpaRepository.class);
     }
 }

@@ -7,17 +7,17 @@
 package at.grueneis.timetable.app;
 
 import at.grueneis.timetable.repositoryjpa.PersistenceFactory;
-import at.grueneis.timetable.service.Service;
-import at.grueneis.timetable.service.ServiceFactory;
-import at.grueneis.timetable.service.TimetableManagementService;
+import at.grueneis.timetable.servicejpa.ServiceJpa;
+import at.grueneis.timetable.servicejpa.ServiceJpaFactory;
+import at.grueneis.timetable.servicejpa.TimetableManagementServiceJpa;
 import java.util.HashMap;
 
 /**
  * A factory to create the services...
  */
-public class ServiceFactoryImpl implements ServiceFactory {
+public class ServiceFactoryImpl implements ServiceJpaFactory {
 
-    private final HashMap<Class<?>, Service> services = new HashMap<>();
+    private final HashMap<Class<?>, ServiceJpa> services = new HashMap<>();
 
     private PersistenceFactory persistenceFactory;
 
@@ -26,10 +26,10 @@ public class ServiceFactoryImpl implements ServiceFactory {
     }
 
     @Override
-    public TimetableManagementService timetableManagementService() {
-        TimetableManagementService timetableManagementService = new TimetableManagementService();
-        timetableManagementService.setTeacherRepository(persistenceFactory.teacherRepository());
-        timetableManagementService.setTeachingUnitJpaRepository(persistenceFactory.teachingUnitRepository());
+    public TimetableManagementServiceJpa timetableManagementService() {
+        TimetableManagementServiceJpa timetableManagementService = new TimetableManagementServiceJpa();
+        timetableManagementService.setTeacherJpaRepository(persistenceFactory.teacherJpaRepository());
+        timetableManagementService.setTeachingUnitJpaRepository(persistenceFactory.teachingUnitJpaRepository());
         return timetableManagementService;
     }
 
