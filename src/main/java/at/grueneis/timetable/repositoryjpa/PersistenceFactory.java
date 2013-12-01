@@ -6,6 +6,9 @@
  */
 package at.grueneis.timetable.repositoryjpa;
 
+/**
+ * A factory specification to create the JPA repositories.
+ */
 public interface PersistenceFactory {
 
     ClassRoomJpaRepository classRoomRepository();

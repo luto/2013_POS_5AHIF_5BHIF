@@ -7,6 +7,6 @@
 package at.grueneis.timetable.repository;
 
 /**
- * A marker interface to be used in Spring configuration as reference.
+ * To reference the Spring data repositories.
  */
 public interface RepositoryPackage {}

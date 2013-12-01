@@ -13,6 +13,11 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * An abstract JPA repository implementation to avoid copied code.
+ *
+ * @param <T> the BasePersistable
+ */
 public abstract class AbstractJpaRepository<T extends BasePersistable> implements JpaRepository {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
@@ -20,7 +25,8 @@ public abstract class AbstractJpaRepository<T extends BasePersistable> implement
     @PersistenceContext
     private EntityManager entityManager;
 
-    public AbstractJpaRepository() {}
+    public AbstractJpaRepository() {
+    }
 
     protected EntityManager entityManager() {
         return entityManager;

@@ -6,10 +6,10 @@
  */
 package at.grueneis.timetable.app;
 
-import at.grueneis.timetable.repositoryjpa.JpaRepository;
 import at.grueneis.timetable.repositoryjpa.ClassRoomJpaRepository;
 import at.grueneis.timetable.repositoryjpa.CurriculumJpaRepository;
 import at.grueneis.timetable.repositoryjpa.CurriculumSubjectJpaRepository;
+import at.grueneis.timetable.repositoryjpa.JpaRepository;
 import at.grueneis.timetable.repositoryjpa.PersistenceFactory;
 import at.grueneis.timetable.repositoryjpa.SchoolClassJpaRepository;
 import at.grueneis.timetable.repositoryjpa.SubjectJpaRepository;
@@ -18,6 +18,9 @@ import at.grueneis.timetable.repositoryjpa.TeachingUnitJpaRepository;
 import java.util.HashMap;
 import javax.persistence.EntityManager;
 
+/**
+ * The factory for all repositories...
+ */
 public class PersistenceFactoryImpl implements PersistenceFactory {
 
     private final HashMap<Class<?>, JpaRepository> repositories = new HashMap<>();

@@ -7,6 +7,6 @@
 package at.grueneis.timetable.service;
 
 /**
- * A marker interface to be used in Spring configuration as reference.
+ * To reference the base package of all services.
  */
 public interface ServicePackage {}

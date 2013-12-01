@@ -6,6 +6,7 @@
  */
 package at.grueneis.timetable.repositoryjpa;
 
-public interface JpaRepository {
-
-}
+/**
+ * A marker interface for all 'pure' JPA repositories.
+ */
+public interface JpaRepository {}
