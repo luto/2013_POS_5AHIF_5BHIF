@@ -9,6 +9,7 @@ package at.grueneis.timetable.repository;
 import at.grueneis.timetable.domain.ClassRoom;
 import at.grueneis.timetable.domain.QClassRoom;
 import com.mysema.query.jpa.impl.JPAQuery;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.junit.Assert;
@@ -33,7 +34,7 @@ public class WhenUsingQueryDslTest extends AbstractJUnit4SpringContextTests {
     }
 
     @Test
-    public void testFindByName() {
+    public void testFindByBuilding() {
         // given
         classRoomRepository.save(new ClassRoom("C5.08", "C", "5"));
         classRoomRepository.save(new ClassRoom("B5.08", "B", "5"));
@@ -42,6 +43,7 @@ public class WhenUsingQueryDslTest extends AbstractJUnit4SpringContextTests {
         // when
         JPAQuery query = new JPAQuery(entityManager);
         QClassRoom classRoom = QClassRoom.classRoom;
+
         query.from(classRoom).
                 where(classRoom.building.eq("B")).
                 orderBy(classRoom.name.asc());
@@ -51,5 +53,23 @@ public class WhenUsingQueryDslTest extends AbstractJUnit4SpringContextTests {
         // then
         Assert.assertNotNull(result);
         Assert.assertEquals("B5.08", result.getName());
+    }
+
+    @Test
+    public void testFindByFloorAndBuilding() {
+        // given
+        classRoomRepository.save(new ClassRoom("C5.08", "C", "5"));
+        classRoomRepository.save(new ClassRoom("B5.08", "B", "5"));
+        classRoomRepository.save(new ClassRoom("A5.08", "A", "5"));
+
+        // when
+        JPAQuery query = new JPAQuery(entityManager);
+        query.from(QClassRoom.classRoom).
+                where(QClassRoom.classRoom.floor.eq("5").
+                        and(QClassRoom.classRoom.building.eq("B")));
+
+        List<ClassRoom> classRooms = query.list(QClassRoom.classRoom);
+
+        Assert.assertNotNull(classRooms.get(0));
     }
 }

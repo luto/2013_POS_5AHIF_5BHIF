@@ -8,11 +8,13 @@ package at.grueneis.timetable.repository;
 
 import at.grueneis.timetable.domain.ClassRoom;
 import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClassRoomRepository extends CrudRepository<ClassRoom, Long> {
+public interface ClassRoomRepository extends
+        ClassRoomRepositoryCustom,
+        JpaRepository<ClassRoom, Long> {
 
     List<ClassRoom> findByName(String name);
 

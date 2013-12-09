@@ -23,15 +23,18 @@ public class ClassRoomRepositoryTest extends AbstractJUnit4SpringContextTests {
 
     @Before
     public void setup() {
+        // remove existing data
         classRoomRepository.deleteAll();
+
+        // create test data
+        classRoomRepository.save(new ClassRoom("C5.08", "C", "5"));
+        classRoomRepository.save(new ClassRoom("B5.08", "B", "5"));
+        classRoomRepository.save(new ClassRoom("A5.08", "A", "5"));
     }
 
     @Test
     public void testFindByName() {
         // given
-        classRoomRepository.save(new ClassRoom("C5.08", "C", "5"));
-        classRoomRepository.save(new ClassRoom("B5.08", "B", "5"));
-        classRoomRepository.save(new ClassRoom("A5.08", "A", "5"));
 
         // when
         List<ClassRoom> byName = classRoomRepository.findByName("C5.08");
@@ -45,9 +48,6 @@ public class ClassRoomRepositoryTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testFindByBuilding() {
         // given
-        classRoomRepository.save(new ClassRoom("C5.08", "C", "5"));
-        classRoomRepository.save(new ClassRoom("B5.08", "B", "5"));
-        classRoomRepository.save(new ClassRoom("A5.08", "A", "5"));
 
         // when
         List<ClassRoom> byName = classRoomRepository.findByBuilding("C");
@@ -56,5 +56,52 @@ public class ClassRoomRepositoryTest extends AbstractJUnit4SpringContextTests {
         Assert.assertNotNull(byName);
         Assert.assertEquals(1, byName.size());
         Assert.assertNotNull(byName.get(0));
+    }
+
+    @Test
+    public void testQueryDslQuery() {
+        // given
+
+        // when
+        List<ClassRoom> byName = classRoomRepository.findWithQueryDsl("B");
+
+        // then
+        Assert.assertNotNull(byName);
+        Assert.assertEquals(1, byName.size());
+        Assert.assertNotNull(byName.get(0));
+    }
+
+    @Test
+    public void testQueryJpaQuery() {
+        // given
+
+        // when
+        List<ClassRoom> byNameX = classRoomRepository.findWithJqlQuery("X");
+        List<ClassRoom> byNameB = classRoomRepository.findWithJqlQuery("B");
+
+        // then
+        Assert.assertNotNull(byNameX);
+        Assert.assertEquals(0, byNameX.size());
+
+        Assert.assertNotNull(byNameB);
+        Assert.assertEquals(1, byNameB.size());
+        Assert.assertNotNull(byNameB.get(0));
+    }
+
+    @Test
+    public void testQueryCriteriaApi() {
+        // given
+
+        // when
+        List<ClassRoom> byNameX = classRoomRepository.findWithCriteriaApi("X");
+        List<ClassRoom> byNameB = classRoomRepository.findWithCriteriaApi("B");
+
+        // then
+        Assert.assertNotNull(byNameX);
+        Assert.assertEquals(0, byNameX.size());
+
+        Assert.assertNotNull(byNameB);
+        Assert.assertEquals(1, byNameB.size());
+        Assert.assertNotNull(byNameB.get(0));
     }
 }
