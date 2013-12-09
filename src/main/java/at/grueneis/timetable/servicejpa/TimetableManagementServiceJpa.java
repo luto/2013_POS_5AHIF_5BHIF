@@ -25,10 +25,10 @@ public class TimetableManagementServiceJpa implements ServiceJpa {
     @Autowired
     private TeachingUnitJpaRepository teachingUnitJpaRepository;
 
-    public void createNewTeacher(String name) {
+    public void createNewTeacher(String shortName, String name) {
         // start transaction
         // write audit log
-        Teacher teacher = new Teacher(name, new Date());
+        Teacher teacher = new Teacher(shortName, name, new Date());
         teacherJpaRepository.persist(teacher);
         // end (commit) transaction
     }

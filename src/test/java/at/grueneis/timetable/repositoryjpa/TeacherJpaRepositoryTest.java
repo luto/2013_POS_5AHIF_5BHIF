@@ -44,7 +44,7 @@ public class TeacherJpaRepositoryTest extends AbstractJpaRepositoryTest {
         TeacherJpaRepository teacherJpaRepository = new TeacherJpaRepository();
         teacherJpaRepository.setEntityManager(entityManager);
 
-		Teacher teacher = new Teacher("Grueneis", new Date());
+		Teacher teacher = new Teacher("GRJ", "Grueneis", new Date());
 
 		teacherJpaRepository.persist(teacher);
 		assertThat(teacher.getId(), is(notNullValue()));

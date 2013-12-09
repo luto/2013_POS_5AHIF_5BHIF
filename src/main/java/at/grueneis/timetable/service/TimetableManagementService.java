@@ -25,10 +25,10 @@ public class TimetableManagementService {
     @Autowired
     private TeachingUnitRepository teachingUnitRepository;
 
-    public void createNewTeacher(String name) {
+    public void createNewTeacher(String shortName, String name) {
         // start transaction
         // write audit log
-        Teacher teacher = new Teacher(name, new Date());
+        Teacher teacher = new Teacher(shortName, name, new Date());
         teacherRepository.save(teacher);
         // end (commit) transaction
     }

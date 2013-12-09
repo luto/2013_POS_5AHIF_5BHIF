@@ -29,6 +29,11 @@ public class Teacher extends BasePersistable {
 
     private static final long serialVersionUID = -6667520361999134030L;
 
+    @Size(max = 10)
+    @NotNull
+    @Column(name = "shortName", nullable = false, length = 10)
+    private String shortName;
+
     @Size(max = 255)
     @NotNull
     @Column(name = "name", nullable = false, length = 255)
@@ -49,9 +54,11 @@ public class Teacher extends BasePersistable {
         // required for JPA
     }
 
-    public Teacher(String name, Date birthDate) {
+    public Teacher(String shortName, String name, Date birthDate) {
+        Ensure.notEmpty("shortName", shortName);
         Ensure.notEmpty("name", name);
         Ensure.notNull("birthDate", birthDate);
+        this.shortName = shortName;
         this.name = name;
         this.birthDate = (Date)birthDate.clone();
         this.subjects = new ArrayList<>();
