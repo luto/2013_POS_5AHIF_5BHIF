@@ -39,7 +39,7 @@ public class TeacherTest {
 
 	@Test
 	public void testMe() {
-		Teacher teacher = new Teacher("Franz", new Date());
+		Teacher teacher = new Teacher("FZ", "Franz", new Date());
 		entityManager.persist(teacher);
 	}
 }

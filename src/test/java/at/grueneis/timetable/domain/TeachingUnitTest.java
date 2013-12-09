@@ -39,7 +39,7 @@ public class TeachingUnitTest {
 
 	@Test
 	public void testCreateATeachingUnit() {
-		Teacher teacher = new Teacher("Grüneis", new Date());
+		Teacher teacher = new Teacher("GRJ", "Grüneis", new Date());
 		Subject subject = new Subject("POS", "very interesting");
 //		TeachingUnit teachingUnit = new TeachingUnit(subject, teacher,
 //				Weekday.MO, 1);
